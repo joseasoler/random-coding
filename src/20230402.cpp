@@ -1,7 +1,3 @@
-/* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-
 #include <algorithm>
 #include <cassert>
 #include <limits>
@@ -12,17 +8,17 @@
 
 using vector = std::vector<int>;
 
-void mergesort(vector::iterator begin, vector::iterator end) {
+static void mergesort(vector::iterator begin, vector::iterator end) {
 	assert(begin < end);
 	const auto size = std::distance(begin, end);
-	assert(size > 0UL);
+	assert(size > 0U);
 	if (size == 1UL) { return; }
 	if (size == 2UL && (*begin > *(begin + 1UL))) {
 		std::iter_swap(begin, begin + 1UL);
 		return;
 	}
-	const auto half_size = size / 2UL;
-	assert(size - half_size > 0UL);
+	const auto half_size = size / 2U;
+	assert(size - half_size > 0U);
 	const auto middle = begin + half_size;
 	mergesort(begin, middle);
 	mergesort(middle, end);
