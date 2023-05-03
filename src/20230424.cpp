@@ -44,6 +44,7 @@ static void process_number(graph_data& graph, phone_number number) {
 		if (!valid_node_index(graph[node_set_index][digit])) {
 			const auto previous_size = graph.size();
 			graph[node_set_index][digit] = previous_size;
+			graph.emplace_back();
 		}
 
 		const auto next_node_set_index = graph[node_set_index][digit];
@@ -67,7 +68,6 @@ static std::size_t phone_numbers(const std::vector<std::string_view>& numbers) {
 	std::size_t result = 0U;
 	for (const auto& nodes : graph) {
 		const auto valid_nodes = std::count_if(nodes.cbegin(), nodes.cend(), valid_node_index);
-		assert(valid_nodes > 0);
 		result += static_cast<std::size_t>(valid_nodes);
 	}
 
@@ -75,6 +75,7 @@ static std::size_t phone_numbers(const std::vector<std::string_view>& numbers) {
 }
 
 TEST_CASE("20230424") {
+	REQUIRE(phone_numbers({"876", "87645", "87644", "876451", "876441"}) == 8U);
 	REQUIRE(phone_numbers({"0", "1"}) == 2U);
 	REQUIRE(phone_numbers({"01", "02", "03"}) == 4U);
 	REQUIRE(phone_numbers({"012", "0123", "01234"}) == 5U);
