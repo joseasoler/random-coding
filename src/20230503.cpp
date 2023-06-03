@@ -5,31 +5,21 @@
 using money_t = unsigned int;
 using coin_t = unsigned int;
 using count_t = unsigned long long;
-using coin_vector = std::vector<coin_t>;
-using coin_iterator = coin_vector::const_iterator;
 
-static count_t count_change(money_t money, coin_iterator begin, coin_iterator end) {
-	count_t current_count = 0U;
-	for (auto coin_it = begin; coin_it != end; ++coin_it) {
-		const coin_t coin = *coin_it;
-		if (coin > money) {
-			// The coins are sorted. When a coin larger than the current money is reached, stop the loop.
-			break;
-		} else if (coin == money) {
-			// This coin is an end case.
-			++current_count;
-		} else {
-			current_count += count_change(money - coin, coin_it, end);
+// https://www.codewars.com/kata/541af676b589989aed0009e7/train/cpp
+static count_t countChange(const money_t money, const std::vector<coin_t>& coins) {
+	std::vector<count_t> solutions_by_count(money + 1U, 0U);
+	// There is always one combination for getting no money, taking no coins.
+	solutions_by_count[0U] = 1U;
+	for (const coin_t current_coin : coins) {
+		for (count_t current_count = current_coin; current_count < (money + 1U); ++current_count) {
+			// If the current count minus the current coin has some solutions, then the current count will also have those
+			// solutions (existing combinations + current coin).
+			// Since solutions_by_count[0] is 1, this will add all amounts divisible by this coin as partial solutions.
+			solutions_by_count[current_count] += solutions_by_count[current_count - current_coin];
 		}
 	}
-
-	return current_count;
-}
-
-static count_t countChange(money_t money, const coin_vector& coins) {
-	coin_vector sorted_coins(coins);
-	std::sort(sorted_coins.begin(), sorted_coins.end());
-	return count_change(money, sorted_coins.cbegin(), sorted_coins.cend());
+	return solutions_by_count.back();
 }
 
 TEST_CASE("20230503") {
