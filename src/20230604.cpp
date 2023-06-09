@@ -3,12 +3,13 @@
 #include <catch2/catch_test_macros.hpp>
 
 // https://www.codewars.com/kata/54521e9ec8e60bc4de000d6c/train/cpp
-static int maxSequence(const std::vector<int>& arr) {
+static int max_sequence(const std::vector<int>& arr) {
 	int max_sequence = 0;
 
 	auto window_begin = arr.cbegin();
 
 	const auto end = arr.cend();
+
 	while (window_begin != end) {
 		// Slide the window to cover as many positive solutions as possible.
 		int current_sequence = *window_begin;
@@ -31,11 +32,11 @@ static int maxSequence(const std::vector<int>& arr) {
 }
 
 TEST_CASE("20230604") {
-	REQUIRE(maxSequence({}) == 0);
-	REQUIRE(maxSequence({2}) == 2);
-	REQUIRE(maxSequence({-1, -890, -1}) == 0);
-	REQUIRE(maxSequence({-1, 1, -1}) == 1);
-	REQUIRE(maxSequence({-1, 1, -1, 4, -1}) == 4);
-	REQUIRE(maxSequence({-2, 1, -3, 4, -1, 2, 1, -5, 4}) == 6);
-	REQUIRE(maxSequence({2, -8, 3, -2, 4, -10}) == 5);
+	REQUIRE(max_sequence({}) == 0);
+	REQUIRE(max_sequence({2}) == 2);
+	REQUIRE(max_sequence({-1, -890, -1}) == 0);
+	REQUIRE(max_sequence({-1, 1, -1}) == 1);
+	REQUIRE(max_sequence({-1, 1, -1, 4, -1}) == 4);
+	REQUIRE(max_sequence({-2, 1, -3, 4, -1, 2, 1, -5, 4}) == 6);
+	REQUIRE(max_sequence({2, -8, 3, -2, 4, -10}) == 5);
 }

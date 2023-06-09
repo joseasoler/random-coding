@@ -1,0 +1,82 @@
+# All clang-tidy checks are enabled by default.
+# Checks producing undesirable results or false positives are to be disabled explicitly documenting the reason.
+#
+# altera-*: Disable FPGA checks.
+# bugprone-easily-swappable-parameters: Allow adjacent parameters of the same type.
+# bugprone-exception-escape: Allow using fields which may throw exceptions in todds::args::data.
+# clang-diagnostic-c++20-compat: todds only supports c++20
+# clang-diagnostic-padded: Ignore padding
+# clang-diagnostic-unknown-warning-option: Triggered by GCC-only warnings.
+# clang-diagnostic-unused-command-line-argument: Ignore unused command line arguments.
+# cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers: Required for test cases.
+# cppcoreguidelines-avoid-non-const-global-variables: Global variables for SIGINT handling.
+# cppcoreguidelines-owning-memory: Allow using non-owner pointers without requiring gsl types.
+# cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay: Allow using the standard assert macro.
+# cppcoreguidelines-pro-bounds-constant-array-index: Do not force bounds checking.
+# cppcoreguidelines-pro-bounds-pointer-arithmetic: Allow using pointer arithmetic.
+# cppcoreguidelines-pro-type-union-access: Some third party libraries feature unions.
+# cppcoreguidelines-pro-type-reinterpret-cast: Writing objects to ofstream requires a reinterpret_cast.
+# cppcoreguidelines-pro-type-vararg,hicpp-vararg: Dear ImGui Text calls.
+# fuchsia-default-arguments-calls: Allow calling functions with default arguments.
+# fuchsia-default-arguments-declarations: Allow declaring functions with default arguments.
+# fuchsia-overloaded-operator: Allow overloading operators.
+# fuchsia-statically-constructed-objects, cert-err58-cpp: Allow statically constructed objects, sparingly.
+# google-runtime-int: Types requested by third party APIs cannot be changed.
+# google-runtime-references: Allow non-const reference parameters.
+# llvm-header-guard: Allow use of #pragma once
+# llvm-qualified-auto,readability-qualified-auto: Tries to treat array iterators as pointers on Linux.
+# llvmlibc-*: Disable all llvm libc specific checks.
+# misc-no-recursion: Allow recursive functions.
+# modernize-use-trailing-return-type: Allow declarations without trailing return types.
+# readability-function-cognitive-complexity: Triggered by catch2 tests.
+# readability-redundant-member-init: Conflicts with -Weffc++
+# readability-use-anyofallof: Demands using std::ranges::any_of even for really simple loops.
+
+Checks: '*,
+-altera-*,
+-bugprone-easily-swappable-parameters,
+-bugprone-exception-escape,
+-clang-diagnostic-c++20-compat,
+-clang-diagnostic-padded,
+-clang-diagnostic-unknown-warning-option,
+-clang-diagnostic-unused-command-line-argument,
+-cppcoreguidelines-avoid-magic-numbers,-readability-magic-numbers,
+-cppcoreguidelines-avoid-non-const-global-variables,
+-cppcoreguidelines-owning-memory,
+-cppcoreguidelines-pro-bounds-array-to-pointer-decay,-hicpp-no-array-decay,
+-cppcoreguidelines-pro-bounds-constant-array-index,
+-cppcoreguidelines-pro-bounds-pointer-arithmetic,
+-cppcoreguidelines-pro-type-union-access,
+-cppcoreguidelines-pro-type-reinterpret-cast,
+-cppcoreguidelines-pro-type-vararg,-hicpp-vararg,
+-fuchsia-default-arguments-calls,
+-fuchsia-default-arguments-declarations,
+-fuchsia-overloaded-operator,
+-fuchsia-statically-constructed-objects,-cert-err58-cpp,
+-google-runtime-int,
+-google-runtime-references,
+-llvm-header-guard,
+-llvm-qualified-auto,-readability-qualified-auto,
+-llvmlibc-*,
+-misc-no-recursion,
+-modernize-use-trailing-return-type,
+-readability-function-cognitive-complexity,
+-readability-redundant-member-init,
+-readability-use-anyofallof,
+'
+
+AnalyzeTemporaryDtors: true
+FormatStyle: file
+# Headers are in a sub-folder named todds.
+HeaderFilterRegex: 'todds/.*'
+
+CheckOptions:
+  - { key: readability-identifier-naming.ClassCase,              value: lower_case }
+  - { key: readability-identifier-naming.EnumCase,               value: lower_case }
+  - { key: readability-identifier-naming.EnumConstantCase,       value: lower_case }
+  - { key: readability-identifier-naming.FunctionCase,           value: lower_case }
+  - { key: readability-identifier-naming.NamespaceCase,          value: lower_case }
+  - { key: readability-identifier-naming.ParameterCase,          value: lower_case }
+  - { key: readability-identifier-naming.TypeAliasCase,          value: lower_case }
+  - { key: readability-identifier-naming.UnionCase,              value: lower_case }
+  - { key: readability-identifier-naming.VariableCase,           value: lower_case }

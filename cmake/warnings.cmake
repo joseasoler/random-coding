@@ -23,6 +23,7 @@ if (RANDOM_CODING_CLANG_ALL_WARNINGS AND CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
 			-Weverything                       # Enable every Clang warning except for the following exceptions.
 			-Wno-c++98-compat                  # This project is not compatible with C++98.
 			-Wno-c++98-compat-pedantic         # This project is not compatible with C++98.
+			-Wno-padded                        # Ignore padding issues.
 			)
 elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
 	# Warnings present in all supported versions of GCC and Clang.

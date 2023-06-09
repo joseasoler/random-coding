@@ -28,7 +28,7 @@ static bool valid_node_index(node_set_index index) {
 static void process_number(graph_data& graph, phone_number number) {
 	node_set_index node_set_index = 0U;
 
-	for (char digit_char : number) {
+	for (const char digit_char : number) {
 		const auto digit = static_cast<std::size_t>(digit_char - '0');
 
 		assert(node_set_index <= graph.size());

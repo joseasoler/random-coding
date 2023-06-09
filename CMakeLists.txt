@@ -30,6 +30,7 @@ add_executable(random-coding
 	src/20230424.cpp
 	src/20230503.cpp
 	src/20230604.cpp
+	src/20230612.cpp
 	)
 
 target_include_directories(random-coding PRIVATE ${CMAKE_CURRENT_LIST_DIR}/include)

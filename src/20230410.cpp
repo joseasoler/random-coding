@@ -20,10 +20,10 @@ static int champion_rank(int champion, const std::string& events) {
 
 	std::size_t input_index = 0UL;
 	while (input_index < events.size()) {
-		std::size_t input_number_end = events.find(separator, input_index);
+		const std::size_t input_number_end = events.find(separator, input_index);
 		assert(input_number_end - input_index <= 2UL);
 
-		std::size_t event_pilot;
+		std::size_t event_pilot{};
 		std::from_chars(&events[input_index], &events[input_number_end], event_pilot);
 		--event_pilot; // Arrays start at 0.
 		assert(event_pilot < size);

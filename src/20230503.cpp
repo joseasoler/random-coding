@@ -7,7 +7,7 @@ using coin_t = unsigned int;
 using count_t = unsigned long long;
 
 // https://www.codewars.com/kata/541af676b589989aed0009e7/train/cpp
-static count_t countChange(const money_t money, const std::vector<coin_t>& coins) {
+static count_t count_change(const money_t money, const std::vector<coin_t>& coins) {
 	std::vector<count_t> solutions_by_count(money + 1U, 0U);
 	// There is always one combination for getting no money, taking no coins.
 	solutions_by_count[0U] = 1U;
@@ -23,11 +23,11 @@ static count_t countChange(const money_t money, const std::vector<coin_t>& coins
 }
 
 TEST_CASE("20230503") {
-	REQUIRE(countChange(4, {1, 2}) == 3);
-	REQUIRE(countChange(11, {5, 7}) == 0);
-	REQUIRE(countChange(98, {3, 14, 8}) == 19);
-	REQUIRE(countChange(199, {3, 5, 9, 15}) == 760);
-	REQUIRE(countChange(300, {5, 10, 20, 50, 100, 200, 500}) == 1022);
-	REQUIRE(countChange(301, {5, 10, 20, 50, 100, 200, 500}) == 0);
-	REQUIRE(countChange(419, {2, 5, 10, 20, 50}) == 18515);
+	REQUIRE(count_change(4, {1, 2}) == 3);
+	REQUIRE(count_change(11, {5, 7}) == 0);
+	REQUIRE(count_change(98, {3, 14, 8}) == 19);
+	REQUIRE(count_change(199, {3, 5, 9, 15}) == 760);
+	REQUIRE(count_change(300, {5, 10, 20, 50, 100, 200, 500}) == 1022);
+	REQUIRE(count_change(301, {5, 10, 20, 50, 100, 200, 500}) == 0);
+	REQUIRE(count_change(419, {2, 5, 10, 20, 50}) == 18515);
 }
